@@ -13,3 +13,4 @@ step 5: if step 4 was success then d0 "terraform apply -var "accesskey="  " -var
 step 6: then login into servers and run shell script provisioning.sh
 
 Used shell script for provisioning.
+ADDED msr.yml file for provisioning using ansible playbook

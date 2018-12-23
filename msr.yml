@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: update and install build-essential
+    apt:
+      name: build-essential
+      state: present
+      update_cache: yes
+  - name: install nvm from link
+    shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
+    args:
+      creates: /home/ubuntu/nvminstalled.txt
+      warn: no
+  - name: install node
+    shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+    args:
+      creates: /home/ubuntu/noderepos.txt
+      warn: no
+  - name: install nodejs docker openssl git
+    apt:
+      name: [ 'nodejs', 'docker.io', 'openssl', 'git']
+      state: present
+  - name: install docker-compose
+    shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    args:
+      creates: /home/ubuntu/dockercompose.txt
+      warn: no
+  - name: change permissions to docker-compose file
+    file:
+      path: /usr/local/bin/docker-compose
+      mode: 0777 

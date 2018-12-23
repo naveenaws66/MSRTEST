@@ -17,5 +17,3 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo apt-get install openssl -y
 #following line installs git
 sudo apt-get install git -y
-
-
