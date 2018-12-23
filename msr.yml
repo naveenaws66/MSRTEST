@@ -8,23 +8,23 @@
       state: present
       update_cache: yes
   - name: install nvm from link
-    shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
+    shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash && touch nvminstalled
     args:
-      creates: /home/ubuntu/nvminstalled.txt
+      creates: /home/ansible/nvminstalled
       warn: no
   - name: install node
-    shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+    shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo bash - && touch noderepos
     args:
-      creates: /home/ubuntu/noderepos.txt
+      creates: /home/ansible/noderepos
       warn: no
   - name: install nodejs docker openssl git
     apt:
       name: [ 'nodejs', 'docker.io', 'openssl', 'git']
       state: present
   - name: install docker-compose
-    shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && touch dockercompose
     args:
-      creates: /home/ubuntu/dockercompose.txt
+      creates: /home/ansible/dockercompose
       warn: no
   - name: change permissions to docker-compose file
     file:
