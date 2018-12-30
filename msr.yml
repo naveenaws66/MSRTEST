@@ -8,6 +8,7 @@
       state: present
       update_cache: yes
   - name: install nvm from link
+    become_user: ansible
     shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash && touch nvminstalled
     args:
       creates: /home/ansible/nvminstalled
